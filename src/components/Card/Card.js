@@ -6,17 +6,21 @@ import dataChamps from "../../data/champs.json";
 // styles
 import "./Card.scss";
 
-export default function Card() {
-  // const [cards, setCards] = useState([]);
+export default function Card({ champ, clickEvent }) {
+  const imgLocalPath = (champ) => {
+    return `./images/${champ}_0.jpg`;
+  };
+
+  //just in case
+  const imgUrlPath = (champion) => {
+    return `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion}_0.jpg`;
+  };
+
   return (
     <>
-      <div className="card">1</div>
-      <div className="card">2</div>
-      <div className="card">3</div>
-      <div className="card">3</div>
-      <div className="card">3</div>
-      <div className="card">3</div>
-      <div className="card">3</div>
+      <div onClick={clickEvent} className="card">
+        <img src={imgLocalPath(champ)} alt="" />
+      </div>
     </>
   );
 }

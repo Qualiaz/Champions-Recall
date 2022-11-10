@@ -1,5 +1,21 @@
 .card {
   width: 120px;
-  height: 190px;
-  border: 2px solid rgb(255, 255, 255);
+  height: 210px;
+  border: 1px solid #a190ee;
+  border-radius: 2rem;
+  overflow: hidden;
+  transition: 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    transform: translate(-2px, -2px);
+    box-shadow: 2px 2px 2px #302561;
+  }
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  transform: scale(1.1);
+  border-radius: 3rem;
 }
