@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import champs from "./data/champs.json";
+
+//layouts
+import Header from "./layouts/Header/Header";
+import Main from "./layouts/Main/Main";
+
+//styles
 import "./App.scss";
 
 const App = () => {
@@ -12,10 +17,11 @@ const App = () => {
   };
 
   return (
-    <div className="images_container">
-      {champs.map((champ) => (
-        <img width="120px" src={imgLocalPath(champ.name)} alt={champ.name} />
-      ))}
+    <div className="app">
+      <Header />
+      <Main>
+        <p>Hids</p>
+      </Main>
     </div>
   );
 };

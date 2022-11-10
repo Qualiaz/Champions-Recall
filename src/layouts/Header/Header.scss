@@ -1,0 +1,36 @@
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 250px;
+
+  background-color: #1b1212;
+
+  .logo {
+    margin-bottom: 4rem;
+    padding: 1rem;
+    background-clip: text;
+    background-image: linear-gradient(45deg, #dd71c2, #a190ee);
+    -webkit-text-fill-color: transparent;
+  }
+
+  .score {
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__highest {
+      font-size: 2rem;
+      text-shadow: 1px 1px 1px #983baf;
+      margin-bottom: 0.5rem;
+    }
+
+    &__current {
+      font-size: 1.7rem;
+      text-shadow: 1px 1px 1px #611c72;
+    }
+  }
+}
