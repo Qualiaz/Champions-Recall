@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import champs from "./data/champs.json";
+import "./App.scss";
 
-function App() {
+const App = () => {
+  const imgUrlPath = (champion) => {
+    return `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion}_0.jpg`;
+  };
+
+  const imgLocalPath = (champ) => {
+    return `./images/${champ}_0.jpg`;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="images_container">
+      {champs.map((champ) => (
+        <img width="120px" src={imgLocalPath(champ.name)} alt={champ.name} />
+      ))}
     </div>
   );
-}
+};
 
 export default App;
