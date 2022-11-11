@@ -6,4 +6,4 @@ The game starts with 3 cards. Each time you select a card, the cards are being s
 
 ---
 
-This is my first React applcation.
+This is my first React application.

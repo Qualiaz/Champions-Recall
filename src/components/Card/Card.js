@@ -19,7 +19,11 @@ export default function Card({ champ, clickEvent }) {
   return (
     <>
       <div onClick={clickEvent} className="card">
-        <img src={imgLocalPath(champ)} alt="" />
+        <img
+          src={imgLocalPath(champ)}
+          data-champ-name={champ}
+          alt="champion card"
+        />
       </div>
     </>
   );
