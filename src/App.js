@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-
 //data
 import dataChamps from "./data/champs.json";
 
@@ -26,7 +25,7 @@ const App = () => {
   const [selectedCards, setSelectedCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
-  const isInitialMount = useRef(true);
+  const [didPlayerLose, setDidPlayerLose] = useState(false);
 
   const generateCards = useCallback((length) => {
     let champs = [];
@@ -50,6 +49,7 @@ const App = () => {
   useEffect(() => {
     randomizeCards();
     setCardsLevel(() => generateCards(3));
+    console.log("set cards on mount");
   }, []);
 
   // When user levels up
@@ -58,18 +58,11 @@ const App = () => {
       randomizeCards();
       setCardsLevel(() => generateCards(level * 2));
     }
-  }, [generateCards, level]);
-
-  const resetGame = () => {
-    setSelectedCards([]);
-    randomizeCards();
-    setCardsLevel(generateCards(3));
-    setLevel(1);
-    setCurrentScore(0);
-  };
+  }, [level]);
 
   const winLevel = () => {
     setLevel((prevLevel) => prevLevel + 1);
+    randomizeCards();
     setSelectedCards([]);
   };
 
@@ -78,35 +71,57 @@ const App = () => {
   };
 
   const checkWin = () => {
-    const hasDuplicatedSelectedCards = hasDuplicateValuesArr(selectedCards);
+    const hasDuplicateSelectedCards = hasDuplicateValuesArr(selectedCards);
     // when user wins level
-    if (cardsLevel.length === selectedCards.length) {
+    if (
+      cardsLevel.length === selectedCards.length &&
+      selectedCards.length >= 1
+    ) {
       winLevel();
     }
     // when user wins round
-    if (!hasDuplicatedSelectedCards) {
+    if (!hasDuplicateSelectedCards && selectedCard) {
       winRound();
     }
     // when user loses
-    if (hasDuplicatedSelectedCards) {
-      resetGame();
+    if (hasDuplicateSelectedCards) {
+      setDidPlayerLose(true);
     }
   };
 
-  const checkState = () => {
-    console.log(selectedCards);
+  const handleClickCard = (e) => {
+    const targetCard = e.target.dataset.champName;
+    setSelectedCard(() => targetCard);
+    setSelectedCards((prevSelectedCards) => {
+      return [...prevSelectedCards, targetCard];
+    });
   };
 
-  const handleClickCard = (e) => {
-    const selectedCard = e.target.dataset.champName;
-    setSelectedCard(() => selectedCard);
-    setSelectedCards((prevSelectedCards) => {
-      return [...prevSelectedCards, selectedCard];
-    });
-    checkState();
-    // checkWin();
-    randomizeCardsLevel();
-  };
+  // when player loses
+  useEffect(() => {
+    if (didPlayerLose) {
+      setSelectedCards([]);
+      randomizeCards();
+      setCardsLevel(generateCards(3));
+      setLevel(1);
+      setCurrentScore(0);
+      setDidPlayerLose(false);
+    }
+  }, [didPlayerLose]);
+
+  // when player wins
+  useEffect(() => {
+    if (selectedCards.length >= 1) {
+      checkWin();
+      randomizeCardsLevel();
+    }
+  }, [selectedCards]);
+
+  useEffect(() => {
+    if (currentScore > highScore) {
+      setHighScore(currentScore);
+    }
+  }, [currentScore]);
 
   return (
     <div className="app">
