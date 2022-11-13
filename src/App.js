@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 //data
 import dataChamps from "./data/champs.json";
 
@@ -11,6 +11,8 @@ import Main from "./layouts/Main/Main";
 
 //components
 import Card from "./components/Card/Card";
+import GameLostModal from "./components/Modal/gamelost/GameLostModal";
+import GameplayInfoModal from "./components/Modal/GameplayInfo/GameplayInfoModal";
 
 //styles
 import "./App.scss";
@@ -26,6 +28,8 @@ const App = () => {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const [didPlayerLose, setDidPlayerLose] = useState(false);
+  const [gameLostModal, setGameLostModal] = useState(false);
+  const [isGameplayInfoModal, setIsGameplayInfoModal] = useState(false);
 
   const generateCards = useCallback((length) => {
     let champs = [];
@@ -52,14 +56,6 @@ const App = () => {
     console.log("set cards on mount");
   }, []);
 
-  // When user levels up
-  useEffect(() => {
-    if (level >= 2) {
-      randomizeCards();
-      setCardsLevel(() => generateCards(level * 2));
-    }
-  }, [level]);
-
   const winLevel = () => {
     setLevel((prevLevel) => prevLevel + 1);
     randomizeCards();
@@ -72,23 +68,25 @@ const App = () => {
 
   const checkWin = () => {
     const hasDuplicateSelectedCards = hasDuplicateValuesArr(selectedCards);
-    // when user wins level
+    // user won level
     if (
       cardsLevel.length === selectedCards.length &&
       selectedCards.length >= 1
     ) {
       winLevel();
     }
-    // when user wins round
+    // user won round
     if (!hasDuplicateSelectedCards && selectedCard) {
       winRound();
     }
-    // when user loses
+    // user lost
     if (hasDuplicateSelectedCards) {
+      setGameLostModal(true);
       setDidPlayerLose(true);
     }
   };
 
+  // When user selects a card
   const handleClickCard = (e) => {
     const targetCard = e.target.dataset.champName;
     setSelectedCard(() => targetCard);
@@ -97,19 +95,6 @@ const App = () => {
     });
   };
 
-  // when player loses
-  useEffect(() => {
-    if (didPlayerLose) {
-      setSelectedCards([]);
-      randomizeCards();
-      setCardsLevel(generateCards(3));
-      setLevel(1);
-      setCurrentScore(0);
-      setDidPlayerLose(false);
-    }
-  }, [didPlayerLose]);
-
-  // when player wins
   useEffect(() => {
     if (selectedCards.length >= 1) {
       checkWin();
@@ -117,6 +102,26 @@ const App = () => {
     }
   }, [selectedCards]);
 
+  // When player loses
+  const resetGame = () => {
+    setGameLostModal(false);
+    setSelectedCards([]);
+    randomizeCards();
+    setCardsLevel(generateCards(3));
+    setLevel(1);
+    setCurrentScore(0);
+    setDidPlayerLose(false);
+  };
+
+  // When user levels up
+  useEffect(() => {
+    if (level >= 2) {
+      randomizeCards();
+      setCardsLevel(() => generateCards(level * 2));
+    }
+  }, [level]);
+
+  // Set high score
   useEffect(() => {
     if (currentScore > highScore) {
       setHighScore(currentScore);
@@ -125,7 +130,11 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header highScore={highScore} currentScore={currentScore} />
+      <Header
+        highScore={highScore}
+        currentScore={currentScore}
+        gameplayInfoHandler={() => setIsGameplayInfoModal(true)}
+      />
       <Main level={level}>
         {cardsLevel.map((champ) => (
           <Card
@@ -135,6 +144,14 @@ const App = () => {
           />
         ))}
       </Main>
+      <GameLostModal open={gameLostModal} onClose={resetGame} />
+      {isGameplayInfoModal && (
+        <GameplayInfoModal
+          closeHandler={() => {
+            setIsGameplayInfoModal(false);
+          }}
+        />
+      )}
     </div>
   );
 };

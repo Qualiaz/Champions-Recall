@@ -1,0 +1,72 @@
+.gameplay-info {
+  &__background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    background-color: rgba(201, 37, 201, 0);
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+
+  &__container {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    justify-content: start;
+    gap: 2rem;
+    outline: 1px solid black;
+    background-color: rgba(151, 52, 146, 0.9);
+    border-radius: 2rem;
+  }
+
+  &__buttons {
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__main {
+      display: flex;
+      gap: 2rem;
+      margin: 1rem 2rem;
+      // height: 3rem;
+      // border: 1px solid black;
+      // margin-top: 2rem;
+    }
+
+    &__options {
+      margin: 1rem 2rem;
+    }
+  }
+
+  &__button {
+    &--rules {
+      width: 6rem;
+      height: 3rem;
+      border: none;
+      border-radius: 5rem;
+    }
+    &--tips {
+      width: 6rem;
+      height: 3rem;
+      border-radius: 5rem;
+      border: none;
+    }
+
+    &--close {
+      width: 6rem;
+      height: 3rem;
+      // background: none;
+      border: none;
+      border-radius: 5rem;
+
+      &:hover {
+        cursor: pointer;
+        background-color: red;
+      }
+    }
+  }
+}
