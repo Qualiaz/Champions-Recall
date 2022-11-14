@@ -138,11 +138,7 @@ const App = () => {
       />
       <Main level={level}>
         {cardsLevel.map((champ) => (
-          <Card
-            champ={champ}
-            key={"key-" + champ}
-            clickEvent={handleClickCard}
-          />
+          <Card champ={champ} key={champ} clickEvent={handleClickCard} />
         ))}
       </Main>
       <GameLostModal open={gameLostModal} onClose={resetGame} />

@@ -1,4 +1,4 @@
-header {
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,6 @@ header {
       text-shadow: 1px 1px 1px #983baf;
       margin-bottom: 0.5rem;
     }
-
     &__current {
       font-size: 1.7rem;
       text-shadow: 1px 1px 1px #611c72;
@@ -43,6 +42,20 @@ header {
     align-items: center;
     gap: 2rem;
     flex: 0;
+
+    button {
+      padding: 1rem;
+      border-radius: 2rem;
+      border: none;
+      background: #dd71c2;
+      color: white;
+      transition: 0.2s;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #f581d8;
+      }
+    }
 
     margin-bottom: 2rem;
     .br {

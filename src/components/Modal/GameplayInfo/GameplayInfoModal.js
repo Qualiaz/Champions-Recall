@@ -1,16 +1,23 @@
 import "./GameplayInfoModal.scss";
 import ReactDOM from "react-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
+
+import tipExample from "./tip-example.png";
 
 export default function GameplayInfo({ closeHandler }) {
-  const tipViews = ["tipOne", "tipTwo"];
+  const tipViews = [
+    "tipOne",
+    "tipTwo",
+    "tipThree",
+    "tipFour",
+    "tipFive",
+    "tipSix",
+  ];
   const [isRulesOpen, setIsRulesOpen] = useState(true);
   const [isTipsOpen, setIsTipsOpen] = useState(false);
   const [currentTipView, setCurrentTipView] = useState(tipViews[0]);
   const [isBtnNextDisabled, setIsBtnNextDisabled] = useState(false);
   const [isBtnPrevDisabled, setIsBtnPrevDisabled] = useState(true);
-
-  const btnRules = useRef();
 
   const switchOpenInfo = () => {
     if (isRulesOpen) {
@@ -34,7 +41,7 @@ export default function GameplayInfo({ closeHandler }) {
     }
   };
 
-  // disabled buttons
+  // disable buttons
   useEffect(() => {
     // next button
     if (tipViews[tipViews.length - 1] === currentTipView)
@@ -54,7 +61,6 @@ export default function GameplayInfo({ closeHandler }) {
               className="gameplay-info__button--rules gameplay-info__button"
               onClick={switchOpenInfo}
               disabled={isRulesOpen}
-              ref={btnRules}
             >
               Rules
             </button>
@@ -68,7 +74,7 @@ export default function GameplayInfo({ closeHandler }) {
           </div>
           <div className="gameplay-info__buttons__options">
             <button
-              className="gameplay-info__button gameplay-info__button--close"
+              className=" gameplay-info__button--close gameplay-info__button"
               onClick={closeHandler}
             >
               Close
@@ -104,16 +110,17 @@ export default function GameplayInfo({ closeHandler }) {
             <h3 className="gameplay-info__tips__title">Tips</h3>
             <div className="gameplay-info__tips__main">
               <button
-                className="tips__btn--left"
+                className="tip__btn tip__btn--prev"
                 onClick={() => switchTipView("prev")}
                 disabled={isBtnPrevDisabled}
               >
-                left
+                prev
               </button>
               {currentTipView === "tipOne" && (
-                <div className="tip__view--1">
+                <div className="tip__view tip__view--1">
                   <p>Ever heard of the loci method?</p>
-                  <p> What about a memory palace?</p>
+                  <p>No? Memory journey then?</p>
+                  <p>What about a memory palace?</p>
                   <br />
                   <p>
                     Perhaps you have heard of the memory palace on the Sherlock
@@ -123,17 +130,83 @@ export default function GameplayInfo({ closeHandler }) {
                 </div>
               )}
               {currentTipView === "tipTwo" && (
-                <div className="tip__view--2">
-                  <p>Hello nubs</p>
+                <div className="tip__view tip__view--2">
+                  <p>This technique uses visualization.</p>
+                  <br />
+                  <p>
+                    Right now perhaps you are sitting in your room, in the
+                    office, or somewhere outside. Regardless of where you are,
+                    you probably know your way around. Where is the kitchen,
+                    office bathroom, or that cool restaurant in the city.
+                  </p>
+                  <br />
+                  <p>
+                    Think of some known place that you would like to go from
+                    where you are, and try to visualize the path to go there.
+                    Pick a spot that is nearby at the moment.
+                  </p>
+                  <br />
+                  <p>e.g starting point is your room, go to the kitchen.</p>
                 </div>
               )}
+              {currentTipView === "tipThree" && (
+                <div className="tip__view tip__view--3">
+                  <p>
+                    Now do it again but stop on specific spots on the path and
+                    add the images that you would like to remember
+                  </p>
+                  <br />
+                  <p>Here is an example of how that might look like...</p>
+                </div>
+              )}
+              {currentTipView === "tipFour" && (
+                <div className="tip__view tip__view--4">
+                  <img className="tip__view--4__img" src={tipExample} alt="" />
+                </div>
+              )}
+              {currentTipView === "tipFive" && (
+                <div className="tip__view tip__view--5">
+                  <p>
+                    In our example you go from the sofa to the dining table.
+                  </p>
+                  <br />
+                  <p>
+                    So, imagine you are sitting on the sofa next to Azir.
+                    Perhaps you have a talk with him or you see him doing
+                    something funny. Tnen you take a walk right behind the sofa.
+                    You see Gnar on the floor playing with a yarn, like cats do.
+                    Then you go sit at the table and you see Amumu sad and you
+                    try to comfort him.
+                  </p>
+                </div>
+              )}
+              {currentTipView === "tipSix" && (
+                <div className="tip__view tip__view-6">
+                  <p>
+                    You can even group the images in one spot to save space.
+                  </p>
+                  <br />
+                  <p>
+                    For example Azir can play with Gnar on the sofa and then
+                    Amumu catches them both with his badges.
+                  </p>
+                  <br />
+                  <p>
+                    This can be more useful and even quicker since you make the
+                    informations interact with each other. However, in case you
+                    try to remember the order of the images, that might be a
+                    little tricky. But hey, we are not remembering the sequence
+                    of pi and we don't need the order in this game!
+                  </p>
+                </div>
+              )}
+
               <button
-                className="tips__btn--right"
-                id="tipBtnRight"
+                className="tip__btn tip__btn--next"
                 onClick={() => switchTipView("next")}
                 disabled={isBtnNextDisabled}
               >
-                right
+                next
               </button>
             </div>
           </div>

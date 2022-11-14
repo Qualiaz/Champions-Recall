@@ -1,12 +1,14 @@
 import "./Header.scss";
 
+import githubSvg from "./github.svg";
+
 export default function Header({
   highScore,
   currentScore,
   gameplayInfoHandler,
 }) {
   return (
-    <header>
+    <header className="header">
       <div className="flex-helper"></div>
       <h1 className="logo">Champions recall</h1>
       <div className="score__container">
@@ -15,12 +17,17 @@ export default function Header({
       </div>
       <div className="info-and-links">
         <div className="br" />
-        <button className="info__button" onClick={gameplayInfoHandler}>
+        <button
+          className="header__gameplay-info__button"
+          onClick={gameplayInfoHandler}
+        >
           Gameplay Info
         </button>
         <div className="br-small"></div>
         <div className="social_links">
-          <a href="#">Github</a>
+          <a href="https://github.com/qualiaz">
+            <img width="40px" src={githubSvg} alt="Github icon" />
+          </a>
         </div>
       </div>
     </header>

@@ -1,8 +1,3 @@
-import { useState } from "react";
-
-// data
-import dataChamps from "../../data/champs.json";
-
 // styles
 import "./Card.scss";
 
