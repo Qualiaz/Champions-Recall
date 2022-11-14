@@ -14,7 +14,9 @@
     width: 500px;
     height: 500px;
     margin: 0 auto;
-    justify-content: start;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: stretch;
     gap: 2rem;
     outline: 1px solid black;
     background-color: rgba(151, 52, 146, 0.9);
@@ -32,9 +34,6 @@
       display: flex;
       gap: 2rem;
       margin: 1rem 2rem;
-      // height: 3rem;
-      // border: 1px solid black;
-      // margin-top: 2rem;
     }
 
     &__options {
@@ -43,30 +42,86 @@
   }
 
   &__button {
+    width: 6rem;
+    height: 3rem;
+    border-radius: 5rem;
+    border: none;
+
     &--rules {
-      width: 6rem;
-      height: 3rem;
-      border: none;
-      border-radius: 5rem;
     }
     &--tips {
-      width: 6rem;
-      height: 3rem;
-      border-radius: 5rem;
-      border: none;
     }
 
     &--close {
-      width: 6rem;
-      height: 3rem;
-      // background: none;
-      border: none;
-      border-radius: 5rem;
-
       &:hover {
         cursor: pointer;
         background-color: red;
       }
+    }
+  }
+
+  &__rules {
+    &__title {
+      font-size: 3rem;
+      margin-left: 2.3rem;
+    }
+
+    &__main {
+      width: 90%;
+      margin: 0 auto;
+
+      p {
+        color: white;
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__tips {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    &__title {
+      font-size: 3rem;
+      margin-left: 2.3rem;
+      margin-bottom: 1rem;
+    }
+    &__main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      height: 380px;
+      border-radius: 3rem;
+      border: 2px solid red;
+      margin: 0 auto;
+    }
+    .tips__btn {
+      &--left {
+        width: 30px;
+      }
+      &--right {
+        width: 30px;
+      }
+    }
+
+    .tip {
+      &__view {
+        &--1 {
+          flex: 2;
+          text-align: center;
+          // border: 1px solid white;
+          margin: 0 1rem;
+        }
+        &--2 {
+          // display: none;
+        }
+      }
+    }
+
+    p {
+      color: white;
+      font-size: 2rem;
     }
   }
 }
