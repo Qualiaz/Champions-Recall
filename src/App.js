@@ -27,7 +27,7 @@ const App = () => {
   const [selectedCards, setSelectedCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
-  const [didPlayerLose, setDidPlayerLose] = useState(false);
+  // const [didPlayerLose, setDidPlayerLose] = useState(false);
   const [gameLostModal, setGameLostModal] = useState(false);
   const [isGameplayInfoModal, setIsGameplayInfoModal] = useState(false);
 
@@ -53,17 +53,18 @@ const App = () => {
   useEffect(() => {
     randomizeCards();
     setCardsLevel(() => generateCards(3));
-    console.log("set cards on mount");
   }, []);
 
   const winLevel = () => {
     setLevel((prevLevel) => prevLevel + 1);
     randomizeCards();
+    setSelectedCard(null);
     setSelectedCards([]);
   };
 
   const winRound = () => {
     setCurrentScore((prevCurrentScore) => prevCurrentScore + 1);
+    randomizeCardsLevel();
   };
 
   const checkWin = () => {
@@ -82,7 +83,7 @@ const App = () => {
     // user lost
     if (hasDuplicateSelectedCards) {
       setGameLostModal(true);
-      setDidPlayerLose(true);
+      // setDidPlayerLose(true);
     }
   };
 
@@ -98,7 +99,6 @@ const App = () => {
   useEffect(() => {
     if (selectedCards.length >= 1) {
       checkWin();
-      randomizeCardsLevel();
     }
   }, [selectedCards]);
 
@@ -106,11 +106,12 @@ const App = () => {
   const resetGame = () => {
     setGameLostModal(false);
     setSelectedCards([]);
+    setSelectedCard(null);
     randomizeCards();
     setCardsLevel(generateCards(3));
     setLevel(1);
     setCurrentScore(0);
-    setDidPlayerLose(false);
+    // setDidPlayerLose(false);
   };
 
   // When user levels up

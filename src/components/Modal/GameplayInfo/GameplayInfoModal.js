@@ -19,7 +19,6 @@ export default function GameplayInfo({ closeHandler }) {
     }
 
     if (isTipsOpen) {
-      btnRules.current.focus();
       setIsRulesOpen(true);
       setIsTipsOpen(false);
     }
