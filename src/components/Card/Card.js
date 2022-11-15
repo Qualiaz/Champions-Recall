@@ -3,7 +3,7 @@ import "./Card.scss";
 
 export default function Card({ champ, clickEvent }) {
   const imgLocalPath = (champ) => {
-    return `./images/${champ}_0.jpg`;
+    return `./images/champs/${champ}_0.jpg`;
   };
 
   //just in case

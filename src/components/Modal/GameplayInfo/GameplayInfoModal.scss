@@ -5,9 +5,10 @@
     align-items: center;
     position: fixed;
     top: 0;
-    background-color: rgba(201, 37, 201, 0);
+    background-color: rgba(88, 57, 88, 0);
     min-width: 100vw;
     min-height: 100vh;
+    backdrop-filter: blur(5px);
   }
 
   &__container {
